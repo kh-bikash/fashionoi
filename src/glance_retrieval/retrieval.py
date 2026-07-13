@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 from typing import Sequence
 
 import numpy as np
@@ -53,13 +54,51 @@ class FashionRetriever:
     def _ensemble_text(self, prompts: Sequence[str]) -> np.ndarray:
         return l2_normalize(self.encoder.encode_texts(prompts).mean(axis=0, keepdims=True))[0]
 
-    def search(self, text: str, k: int = 5, candidate_k: int = 100) -> list[SearchResult]:
-        parsed = parse_query(text)
+    def search(
+        self,
+        text: str,
+        k: int = 5,
+        candidate_k: int = 100,
+        strategy: str = "structured",
+        profile: dict[str, float | int | str] | None = None,
+    ) -> list[SearchResult]:
+        if strategy not in {"global", "structured"}:
+            raise ValueError("strategy must be 'global' or 'structured'")
+        started = perf_counter()
         full_query = self._ensemble_text((text, f"a fashion photo of {text}"))
+        text_ready = perf_counter()
         candidate_ids, _ = self.store.candidate_search(full_query, max(candidate_k, k), self.global_vectors)
+        candidates_ready = perf_counter()
         candidate_global = np.asarray(self.global_vectors[candidate_ids])
         raw_global = candidate_global @ full_query
         z_global = _standardize(raw_global)
+
+        if strategy == "global":
+            order = np.argsort(-z_global, kind="stable")[:k]
+            results = [
+                SearchResult(
+                    rank=rank,
+                    image_id=self.metadata[int(candidate_ids[position])]["image_id"],
+                    path=self.metadata[int(candidate_ids[position])]["path"],
+                    score=round(float(z_global[position]), 6),
+                    global_score=round(float(z_global[position]), 6),
+                    conjunction_score=round(float(z_global[position]), 6),
+                    facet_scores={},
+                )
+                for rank, position in enumerate(order, start=1)
+            ]
+            if profile is not None:
+                profile.update(
+                    strategy=strategy,
+                    candidate_count=len(candidate_ids),
+                    full_query_encoding_seconds=round(text_ready - started, 6),
+                    candidate_search_seconds=round(candidates_ready - text_ready, 6),
+                    rerank_seconds=0.0,
+                    total_seconds=round(perf_counter() - started, 6),
+                )
+            return results
+
+        parsed = parse_query(text)
 
         facet_columns: list[np.ndarray] = []
         facet_names: list[str] = []
@@ -135,5 +174,15 @@ class FashionRetriever:
                     conjunction_score=round(float(conjunction[position]), 6),
                     facet_scores=facet_scores,
                 )
+            )
+        if profile is not None:
+            finished = perf_counter()
+            profile.update(
+                strategy=strategy,
+                candidate_count=len(candidate_ids),
+                full_query_encoding_seconds=round(text_ready - started, 6),
+                candidate_search_seconds=round(candidates_ready - text_ready, 6),
+                rerank_seconds=round(finished - candidates_ready, 6),
+                total_seconds=round(finished - started, 6),
             )
         return results

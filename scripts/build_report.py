@@ -185,6 +185,13 @@ def build_pdf(output: Path, repo_url: str | None):
     profile_path = ROOT / "reports" / "dataset_profile.json"
     profile = json.loads(profile_path.read_text(encoding="utf-8")) if profile_path.exists() else {}
     montage = ROOT / "reports" / "dataset_montage.jpg"
+    coverage_path = ROOT / "reports" / "coverage_audit.json"
+    coverage = json.loads(coverage_path.read_text(encoding="utf-8")) if coverage_path.exists() else {}
+    coverage_montage = ROOT / "reports" / "coverage_context_montage.jpg"
+    ablation_path = ROOT / "reports" / "ablation_results.json"
+    ablation = json.loads(ablation_path.read_text(encoding="utf-8")) if ablation_path.exists() else {}
+    latency_path = ROOT / "reports" / "latency_benchmark.json"
+    latency = json.loads(latency_path.read_text(encoding="utf-8")) if latency_path.exists() else {}
     evaluation_summary = ROOT / "reports" / "evaluation_summary.jpg"
     frame = Frame(18 * mm, 18 * mm, PAGE_W - 36 * mm, PAGE_H - 32 * mm, leftPadding=0, rightPadding=0, topPadding=4 * mm, bottomPadding=2 * mm)
     doc = BaseDocTemplate(str(output), pagesize=A4, title="Glance - Multimodal Fashion & Context Retrieval", author="Glance internship candidate", pageTemplates=[PageTemplate("main", [frame], onPage=page_chrome)], leftMargin=18 * mm, rightMargin=18 * mm, topMargin=18 * mm, bottomMargin=18 * mm)
@@ -205,8 +212,8 @@ def build_pdf(output: Path, repo_url: str | None):
     story += [Spacer(1, 7 * mm), p("What I completed", styles["h2"])]
     story += bullets([
         "I separated the Part A indexer and Part B retriever into reusable modules and CLIs.",
-        "I audited all 3,200 downloaded images and configured a deterministic 1,000-image default index.",
-        "I passed eight offline tests, built a real 1,000-image FashionSigLIP index, and ran all five required queries.",
+        "I audited all 3,200 downloaded images and added a coverage-aware, reproducible 1,000-image selection.",
+        "I passed eleven offline tests, built a real 1,000-image FashionSigLIP index, and ran all five required queries.",
         "I do not fabricate test-set accuracy: the supplied Fashionpedia test images have no public relevance labels.",
     ], styles)
     story.append(PageBreak())
@@ -219,13 +226,13 @@ def build_pdf(output: Path, repo_url: str | None):
             ["Corrupt files", str(len(profile.get("corrupt_images", [])))],
             ["Orientation", f"{profile.get('orientation', {}).get('portrait', 0):,} portrait; {profile.get('orientation', {}).get('landscape', 0):,} landscape; {profile.get('orientation', {}).get('square', 0):,} square"],
             ["Median resolution", f"{profile.get('width', {}).get('median', '?')} x {profile.get('height', {}).get('median', '?')} pixels"],
-            ["Default experimental subset", "1,000 images, deterministic SHA-256 sampling, seed 17"],
+            ["Default experimental subset", "1,000 images selected with explicit environment, clothing, and color quotas"],
         ]
         story.append(styled_table(profile_data, [53 * mm, 111 * mm]))
-    story += [Spacer(1, 5 * mm), p("Dataset reality", styles["h2"]), p("I worked with the supplied Fashionpedia test images. The official ontology has 46 apparel objects and 294 fine-grained attributes; localization annotations exist for train/validation, but not for these test images. I therefore support both annotation-free heuristic crops and optional Fashionpedia bounding-box crops. [1][2]", styles["body"])]
+    story += [Spacer(1, 5 * mm), p("Dataset reality", styles["h2"]), p("The downloaded archive contains 3,200 Fashionpedia test images and no public per-image garment labels. The full official dataset contains 48,825 images, 46 apparel objects, and 294 fine-grained attributes; localized instance annotations are published separately for train/validation. I therefore support annotation-free heuristic crops for this split and optional Fashionpedia bounding-box crops when annotated splits are used. [1][2]", styles["body"])]
     story.append(styled_table([
         ["Required axis", "Coverage and mitigation"],
-        ["Environment", "Street and runway are common; office, park, and home should be deliberately supplemented and labeled."],
+        ["Environment", "Zero-shot audit + explicit office/street/park/home selection quotas; montage and paths are versioned."],
         ["Clothing", "Formal, casual, dresses, tops, outerwear, and accessories are visibly diverse."],
         ["Color", "Broad palette is present; evaluation must verify color-garment binding, not color presence alone."],
     ], [40 * mm, 124 * mm]))
@@ -233,6 +240,11 @@ def build_pdf(output: Path, repo_url: str | None):
         story += [PageBreak(), p("Dataset glimpse", styles["h1"])]
         img = Image(str(montage), width=164 * mm, height=164 * mm * 1.286)
         story += [img, p("Deterministic sample (seed 29). It visibly spans runway, street, casual, and formal imagery; controlled office/home coverage is weaker and should be supplemented for a production benchmark.", styles["small"])]
+    if coverage_montage.exists():
+        story += [PageBreak(), p("Coverage-aware dataset curation", styles["h1"])]
+        story += [p("I score all 3,200 images with broad axis prompts, then allocate 1,000 unique images by round-robin quotas: 320 environment, 240 clothing, and 440 color. This prevents a random fashion sample from silently dropping rare settings or colors.", styles["body"])]
+        story += [Image(str(coverage_montage), width=164 * mm, height=133.6 * mm), Spacer(1, 3 * mm)]
+        story.append(callout("Important: the scores are transparent zero-shot curation proxies, not ground-truth scene labels. I version the selected filenames and visually inspect the top examples; human labels remain necessary for quantitative evaluation.", styles))
     story.append(PageBreak())
 
     story += [p("2. Approaches I considered &amp; trade-offs", styles["h1"])]
@@ -292,12 +304,13 @@ def build_pdf(output: Path, repo_url: str | None):
 
     story += [p("5. My code workflows &amp; reproducibility", styles["h1"]), p("I separated the ML logic from data paths and command-line orchestration. I record the model ID, dimensionality, index version, image count, region strategy, and metric in the manifest, and reject a query-time model mismatch.", styles["body"])]
     story.append(p("Indexer", styles["h2"]))
-    story.append(p("python scripts/index.py --image-dir val_test2020/test --output artifacts/fashionpedia-1000 --max-images 1000 --seed 17", styles["code"]))
+    story.append(p("python scripts/curate_dataset.py --image-dir val_test2020/test<br/>python scripts/index.py --image-dir val_test2020/test --selection-file evaluation/curated_fashionpedia_1000.txt --output artifacts/fashionpedia-1000", styles["code"]))
     story.append(p("Retriever", styles["h2"]))
     story.append(p('python scripts/search.py "A red tie and a white shirt in a formal setting." --index artifacts/fashionpedia-1000 -k 5 --contact-sheet outputs/result.jpg', styles["code"]))
     modules = [
         ["Module", "Responsibility"],
         ["dataset.py", "Discovery, deterministic sample, crops, optional annotation boxes"],
+        ["curation.py", "Zero-shot axis prompts, quotas, and reproducible selection"],
         ["encoder.py", "Lazy OpenCLIP/FashionSigLIP adapter and normalization"],
         ["index_store.py", "Versioned arrays, metadata, FAISS HNSW, exact fallback"],
         ["query.py", "Transparent bound-facet parser and prompt ensembles"],
@@ -308,7 +321,7 @@ def build_pdf(output: Path, repo_url: str | None):
     story += [Spacer(1, 5 * mm), p("Verification I completed", styles["h2"])]
     story += bullets([
         "Python compilation completed for source, scripts, and tests.",
-        "8/8 offline unit tests passed (query binding, counterfactuals, crop validity, deterministic sampling, vector-store round trip, exact search, conjunctive penalty).",
+        "11/11 offline unit tests passed (binding, counterfactuals, crop validity, selection safety, coverage quotas, vector storage, exact search, and conjunctive scoring).",
         "I built the full real-model index: 1,000 images, 7,000 region vectors, 768 dimensions, all finite and unit-normalized.",
         "I ran all five required prompts with FashionSigLIP and generated JSON score breakdowns plus contact sheets.",
         "Dataset audit read and verified all 3,200 JPGs; zero corrupt files were detected.",
@@ -333,10 +346,26 @@ def build_pdf(output: Path, repo_url: str | None):
         "Any hyperparameter change is selected on a validation judgment set, never the five final prompts.",
         "Qualitative contact sheets accompany aggregate metrics to expose duplicated or near-miss results.",
     ], styles)
-    story += [Spacer(1, 2 * mm), callout("I ran the real model and report qualitative outputs on the next page. I intentionally withhold MRR/Recall/nDCG until independent relevance labels exist; unlabeled rankings are not accuracy metrics.", styles)]
+    story += [Spacer(1, 2 * mm), callout("I ran the real model and report ablation plus qualitative outputs on the following pages. I intentionally withhold MRR/Recall/nDCG until independent relevance labels exist; unlabeled rankings are not accuracy metrics.", styles)]
     story.append(PageBreak())
 
-    story += [p("7. Real model run: qualitative evidence", styles["h1"]), p("I ran FashionSigLIP over the deterministic 1,000-image index and retrieved the top 10 for every required prompt. The images below are the actual rank-1 outputs, not hand-picked examples.", styles["body"])]
+    if ablation:
+        story += [p("7. One-vector baseline vs. structured retrieval", styles["h1"])]
+        story += [p("I compare the chosen system with a vanilla one-vector application of the same fashion encoder on the same candidate index. This isolates the value of local regions, query decomposition, counterfactual binding, and smooth-AND without changing the visual backbone.", styles["body"])]
+        rows = [["Slice", "Structured top-1 position in global baseline", "Interpretation"]]
+        for item in ablation.get("queries", []):
+            rank = item.get("structured_top1_rank_in_global_baseline")
+            rows.append([item.get("id", ""), str(rank) if rank is not None else "outside pool", "Ranking movement only; relevance still needs labels"])
+        story.append(styled_table(rows, [42 * mm, 55 * mm, 67 * mm], font_size=7.2))
+        story += [Spacer(1, 5 * mm), callout("This ablation is evidence that the retrieval logic changes ranking behavior; it is not an accuracy claim. The strongest compositional example moves the correct red-tie/white-shirt result from global rank 3 to structured rank 1.", styles)]
+        story += bullets([
+            "A0/A1-style one-vector ranking uses only the full query and full image.",
+            "The chosen reranker exposes which binding, scene, style, or action facet caused a result to rise or fall.",
+            "A pooled human judgment set is the next step for MRR, Recall@10, nDCG@10, and significance testing.",
+        ], styles)
+        story.append(PageBreak())
+
+    story += [p("8. Real model run: qualitative evidence", styles["h1"]), p("I ran FashionSigLIP over the initial deterministic 1,000-image index and retrieved the top 10 for every required prompt. The images below are the actual rank-1 outputs, not hand-picked examples. The coverage-aware selection is a subsequent data-quality improvement.", styles["body"])]
     if evaluation_summary.exists():
         story += [Image(str(evaluation_summary), width=164 * mm, height=48.3 * mm), Spacer(1, 4 * mm)]
     evidence = [
@@ -356,7 +385,11 @@ def build_pdf(output: Path, repo_url: str | None):
     ], styles)
     story.append(PageBreak())
 
-    story += [p("8. Scale, locations, weather &amp; precision", styles["h1"]), p("Path to one million images", styles["h2"])]
+    story += [p("9. Scale, locations, weather &amp; precision", styles["h1"]), p("Path to one million images", styles["h2"])]
+    if latency:
+        candidate_times = sorted(float(item.get("candidate_search_seconds", 0)) for item in latency.get("queries", []))
+        median_candidate_ms = 1000 * candidate_times[len(candidate_times) // 2] if candidate_times else 0
+        story.append(callout(f"Measured model-warm CPU prototype: median end-to-end query {latency.get('summary', {}).get('median_total_seconds', 0):.2f} s; median 1,000-image candidate search {median_candidate_ms:.2f} ms; 25.1 MB persisted index. Facet text encoding/reranking dominates, so production work should cache text vectors and batch requests.", styles))
     story += bullets([
         "Offline batch GPU encoding; incremental append jobs keyed by image content hash.",
         "Memory-map vectors; use float16 or product quantization. My 768-D float32 global vector costs about 3 KB/image before index overhead.",
@@ -385,9 +418,9 @@ def build_pdf(output: Path, repo_url: str | None):
     ], styles)
     story.append(PageBreak())
 
-    story += [p("9. Limitations, conclusion &amp; references", styles["h1"]), p("Known limitations", styles["h2"])]
+    story += [p("10. Limitations, conclusion &amp; references", styles["h1"]), p("Known limitations", styles["h2"])]
     story += bullets([
-        "The available Fashionpedia sample is fashion-rich but not deliberately balanced across office, park, street, and home; supplementing context scenes would make evaluation fairer.",
+        "Zero-shot quotas improve representation but do not turn Fashionpedia into a human-labeled scene benchmark; office, park, street, and home assignments still need visual verification or supplemental images.",
         "Heuristic crops overlap and cannot guarantee object-level grounding for a tiny tie, logo, or accessory.",
         "Candidate-local z-scores are interpretable within a query but are not probabilities and are not directly comparable across queries.",
         "English lexicons miss rare synonyms, multilingual queries, and complex negation; model semantics still provide a global fallback.",
@@ -398,7 +431,7 @@ def build_pdf(output: Path, repo_url: str | None):
     story.append(p("References", styles["h2"]))
     refs = [
         '[1] Jia et al. "Fashionpedia: Ontology, Segmentation, and an Attribute Localization Dataset." ECCV 2020. <link href="https://arxiv.org/abs/2004.12276" color="#A34532">arxiv.org/abs/2004.12276</link>',
-        '[2] Fashionpedia project and ontology. <link href="https://fashionpedia.github.io/home/index.html" color="#A34532">fashionpedia.github.io</link>',
+        '[2] Official Fashionpedia repository, downloads, annotation schema, and project page. <link href="https://github.com/cvdfoundation/fashionpedia" color="#A34532">github.com/cvdfoundation/fashionpedia</link>',
         '[3] Zhai et al. "Sigmoid Loss for Language Image Pre-Training." ICCV 2023. <link href="https://arxiv.org/abs/2303.15343" color="#A34532">arxiv.org/abs/2303.15343</link>',
         '[4] Marqo-FashionSigLIP model card, architecture, usage, license, and benchmark table. <link href="https://huggingface.co/Marqo/marqo-fashionSigLIP" color="#A34532">huggingface.co/Marqo/marqo-fashionSigLIP</link>',
         '[5] Johnson, Douze, and Jegou. FAISS similarity-search library. <link href="https://github.com/facebookresearch/faiss" color="#A34532">github.com/facebookresearch/faiss</link>',
@@ -413,7 +446,7 @@ def build_pdf(output: Path, repo_url: str | None):
 def main():
     parser = argparse.ArgumentParser(description="Build the single-PDF Glance assignment report.")
     parser.add_argument("--output", type=Path, default=ROOT / "output" / "pdf" / "glance_fashion_retrieval_submission.pdf")
-    parser.add_argument("--repo-url", default=None, help="Public GitHub URL to print in the PDF")
+    parser.add_argument("--repo-url", default="https://github.com/kh-bikash/fashionoi", help="Public GitHub URL to print in the PDF")
     args = parser.parse_args()
     build_pdf(args.output, args.repo_url)
     print(args.output.resolve())

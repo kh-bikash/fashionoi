@@ -1,7 +1,9 @@
 from pathlib import Path
 import unittest
 
-from glance_retrieval.dataset import deterministic_sample, heuristic_regions
+import tempfile
+
+from glance_retrieval.dataset import deterministic_sample, heuristic_regions, load_selection_file
 
 
 class DatasetTests(unittest.TestCase):
@@ -19,3 +21,12 @@ class DatasetTests(unittest.TestCase):
         self.assertEqual(regions[0].box, (0, 0, 852, 1024))
         self.assertEqual(len(regions), 7)
         self.assertTrue(all(x1 > x0 and y1 > y0 for _, (x0, y0, x1, y1) in ((r.name, r.box) for r in regions)))
+
+    def test_selection_file_is_ordered_and_deduplicated(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "a.jpg").write_bytes(b"x")
+            (root / "b.jpg").write_bytes(b"x")
+            selection = root / "selection.txt"
+            selection.write_text("b.jpg\na.jpg\nb.jpg\n", encoding="utf-8")
+            self.assertEqual(load_selection_file(selection, root), [(root / "b.jpg").resolve(), (root / "a.jpg").resolve()])

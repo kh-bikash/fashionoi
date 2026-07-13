@@ -2,7 +2,8 @@ param(
     [int]$MaxImages = 1000,
     [string]$Device = "",
     [switch]$SkipInstall,
-    [switch]$WithFaiss
+    [switch]$WithFaiss,
+    [switch]$RandomSubset
 )
 
 $ErrorActionPreference = "Stop"
@@ -22,6 +23,17 @@ if (-not $SkipInstall) {
     & $Python -m pip install --upgrade pip
     $Requirements = if ($WithFaiss) { "requirements-faiss.txt" } else { "requirements.txt" }
     & $Python -m pip install -r (Join-Path $Root $Requirements)
+    & $Python -m pip install -e $Root
+}
+
+$Selection = Join-Path $Root "evaluation\curated_fashionpedia_1000.txt"
+if (-not $RandomSubset -and -not (Test-Path -LiteralPath $Selection)) {
+    $CurationArgs = @(
+        (Join-Path $Root "scripts\curate_dataset.py"),
+        "--image-dir", (Join-Path $Root "val_test2020\test")
+    )
+    if ($Device) { $CurationArgs += @("--device", $Device) }
+    & $Python @CurationArgs
 }
 
 $IndexArgs = @(
@@ -30,6 +42,9 @@ $IndexArgs = @(
     "--output", (Join-Path $Root "artifacts\fashionpedia-1000"),
     "--max-images", $MaxImages
 )
+if (-not $RandomSubset -and (Test-Path -LiteralPath $Selection)) {
+    $IndexArgs += @("--selection-file", $Selection)
+}
 if ($Device) { $IndexArgs += @("--device", $Device) }
 if (-not $WithFaiss) { $IndexArgs += "--no-faiss" }
 & $Python @IndexArgs
@@ -48,4 +63,4 @@ if ($Device) { $SearchArgs += @("--device", $Device) }
 
 Write-Host ""
 Write-Host "Done. Inspect results in: $OutputDir" -ForegroundColor Green
-Write-Host "Next: publish the repository, then regenerate the PDF with --repo-url."
+Write-Host "The public repository URL is embedded by default when scripts\build_report.py is run."

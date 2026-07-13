@@ -1,0 +1,65 @@
+{
+  "device": "cpu",
+  "model_id": "hf-hub:Marqo/marqo-fashionSigLIP",
+  "image_count": 1000,
+  "candidate_k": 100,
+  "index_bytes": 25073058,
+  "startup_excluded": true,
+  "summary": {
+    "mean_total_seconds": 4.389487,
+    "median_total_seconds": 4.05761,
+    "maximum_total_seconds": 9.857263
+  },
+  "queries": [
+    {
+      "id": "attribute",
+      "query": "A person in a bright yellow raincoat.",
+      "strategy": "structured",
+      "candidate_count": 100,
+      "full_query_encoding_seconds": 0.369857,
+      "candidate_search_seconds": 0.000839,
+      "rerank_seconds": 3.686915,
+      "total_seconds": 4.05761
+    },
+    {
+      "id": "context",
+      "query": "Professional business attire inside a modern office.",
+      "strategy": "structured",
+      "candidate_count": 100,
+      "full_query_encoding_seconds": 0.404609,
+      "candidate_search_seconds": 0.00066,
+      "rerank_seconds": 1.085069,
+      "total_seconds": 1.490337
+    },
+    {
+      "id": "semantic",
+      "query": "Someone wearing a blue shirt sitting on a park bench.",
+      "strategy": "structured",
+      "candidate_count": 100,
+      "full_query_encoding_seconds": 0.457742,
+      "candidate_search_seconds": 0.000726,
+      "rerank_seconds": 4.669999,
+      "total_seconds": 5.128467
+    },
+    {
+      "id": "style",
+      "query": "Casual weekend outfit for a city walk.",
+      "strategy": "structured",
+      "candidate_count": 100,
+      "full_query_encoding_seconds": 0.407076,
+      "candidate_search_seconds": 0.000805,
+      "rerank_seconds": 1.005878,
+      "total_seconds": 1.413758
+    },
+    {
+      "id": "compositional",
+      "query": "A red tie and a white shirt in a formal setting.",
+      "strategy": "structured",
+      "candidate_count": 100,
+      "full_query_encoding_seconds": 0.396665,
+      "candidate_search_seconds": 0.000668,
+      "rerank_seconds": 9.459931,
+      "total_seconds": 9.857263
+    }
+  ]
+}

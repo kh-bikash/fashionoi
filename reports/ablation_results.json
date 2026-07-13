@@ -1,0 +1,1126 @@
+{
+  "baseline": "full-image FashionSigLIP vector",
+  "chosen": "region-aware structured reranker",
+  "queries": [
+    {
+      "id": "attribute",
+      "query": "A person in a bright yellow raincoat.",
+      "global_top_10": [
+        {
+          "rank": 1,
+          "image_id": "b5b51154d3218215",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\729331a4d925fefce91c66918f4a14eb.jpg",
+          "score": 4.0,
+          "global_score": 4.0,
+          "conjunction_score": 4.0,
+          "facet_scores": {}
+        },
+        {
+          "rank": 2,
+          "image_id": "325f3de1a78439e0",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\81f67b4843e942a80831813776dc7e7c.jpg",
+          "score": 2.337694,
+          "global_score": 2.337694,
+          "conjunction_score": 2.337694,
+          "facet_scores": {}
+        },
+        {
+          "rank": 3,
+          "image_id": "278ac5459f874600",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\765d5b5f4b67374f4487ba4d99020d65.jpg",
+          "score": 2.235953,
+          "global_score": 2.235953,
+          "conjunction_score": 2.235953,
+          "facet_scores": {}
+        },
+        {
+          "rank": 4,
+          "image_id": "6ebd9bee50a93c26",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\591fcf796516e708cd42b1126fabe689.jpg",
+          "score": 2.170806,
+          "global_score": 2.170806,
+          "conjunction_score": 2.170806,
+          "facet_scores": {}
+        },
+        {
+          "rank": 5,
+          "image_id": "4e315b09f9679948",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\451da4d8f4ec24ed885d4ce5c036bdab.jpg",
+          "score": 2.130978,
+          "global_score": 2.130978,
+          "conjunction_score": 2.130978,
+          "facet_scores": {}
+        },
+        {
+          "rank": 6,
+          "image_id": "631d3f5740d7968f",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\032e7b9f985406a0b76a0d1164e3050c.jpg",
+          "score": 1.930286,
+          "global_score": 1.930286,
+          "conjunction_score": 1.930286,
+          "facet_scores": {}
+        },
+        {
+          "rank": 7,
+          "image_id": "54c9ca5645225e25",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\eb001cb29f156112d158a52621e70964.jpg",
+          "score": 1.78883,
+          "global_score": 1.78883,
+          "conjunction_score": 1.78883,
+          "facet_scores": {}
+        },
+        {
+          "rank": 8,
+          "image_id": "7d46727f0513b27a",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\bf323c62fb410d71fd36249e30dd15fb.jpg",
+          "score": 1.677267,
+          "global_score": 1.677267,
+          "conjunction_score": 1.677267,
+          "facet_scores": {}
+        },
+        {
+          "rank": 9,
+          "image_id": "aad91d0b0098fc24",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\66d8259478a29ff1d7b2d0f8a4b49052.jpg",
+          "score": 1.595666,
+          "global_score": 1.595666,
+          "conjunction_score": 1.595666,
+          "facet_scores": {}
+        },
+        {
+          "rank": 10,
+          "image_id": "4d80f72e15ec826c",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\67604e1a655ce26165747f073d9924f3.jpg",
+          "score": 1.532075,
+          "global_score": 1.532075,
+          "conjunction_score": 1.532075,
+          "facet_scores": {}
+        }
+      ],
+      "structured_top_10": [
+        {
+          "rank": 1,
+          "image_id": "b5b51154d3218215",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\729331a4d925fefce91c66918f4a14eb.jpg",
+          "score": 3.13368,
+          "global_score": 4.0,
+          "conjunction_score": 3.37824,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 3.3782
+          }
+        },
+        {
+          "rank": 2,
+          "image_id": "6ebd9bee50a93c26",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\591fcf796516e708cd42b1126fabe689.jpg",
+          "score": 1.735409,
+          "global_score": 2.170806,
+          "conjunction_score": 1.879718,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.8797
+          }
+        },
+        {
+          "rank": 3,
+          "image_id": "7d46727f0513b27a",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\bf323c62fb410d71fd36249e30dd15fb.jpg",
+          "score": 1.707393,
+          "global_score": 1.677267,
+          "conjunction_score": 1.94107,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.9411
+          }
+        },
+        {
+          "rank": 4,
+          "image_id": "143d48136de72326",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\daa5986d4a683b547328db6dce8d7817.jpg",
+          "score": 1.333773,
+          "global_score": -0.254318,
+          "conjunction_score": 1.829227,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.8292
+          }
+        },
+        {
+          "rank": 5,
+          "image_id": "325f3de1a78439e0",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\81f67b4843e942a80831813776dc7e7c.jpg",
+          "score": 1.332912,
+          "global_score": 2.337694,
+          "conjunction_score": 1.309677,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.3097
+          }
+        },
+        {
+          "rank": 6,
+          "image_id": "631d3f5740d7968f",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\032e7b9f985406a0b76a0d1164e3050c.jpg",
+          "score": 1.205896,
+          "global_score": 1.930286,
+          "conjunction_score": 1.221804,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.2218
+          }
+        },
+        {
+          "rank": 7,
+          "image_id": "d650f7422798d87e",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\34200ca626775c549932ff37b1fd1875.jpg",
+          "score": 1.101683,
+          "global_score": 0.652275,
+          "conjunction_score": 1.338456,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.3385
+          }
+        },
+        {
+          "rank": 8,
+          "image_id": "af8c8ec5411db83a",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\bfdb81a5f9bebef69b5cda7f59a8daab.jpg",
+          "score": 1.097692,
+          "global_score": 0.573815,
+          "conjunction_score": 1.348826,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.3488
+          }
+        },
+        {
+          "rank": 9,
+          "image_id": "b7b40e5f4ccb62ec",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\5f2af17b92b92e0b5bf6f9c8dffb6170.jpg",
+          "score": 1.09116,
+          "global_score": -0.700797,
+          "conjunction_score": 1.59504,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.595
+          }
+        },
+        {
+          "rank": 10,
+          "image_id": "278ac5459f874600",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\765d5b5f4b67374f4487ba4d99020d65.jpg",
+          "score": 1.08773,
+          "global_score": 2.235953,
+          "conjunction_score": 1.003116,
+          "facet_scores": {
+            "binding:bright yellow raincoat": 1.0031
+          }
+        }
+      ],
+      "structured_top1_rank_in_global_baseline": 1,
+      "note": "This is an unlabeled ranking comparison, not an accuracy metric."
+    },
+    {
+      "id": "context",
+      "query": "Professional business attire inside a modern office.",
+      "global_top_10": [
+        {
+          "rank": 1,
+          "image_id": "bf284e3e404d8974",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\4098fcf6792d6ae8007dfb809cebd442.jpg",
+          "score": 2.590718,
+          "global_score": 2.590718,
+          "conjunction_score": 2.590718,
+          "facet_scores": {}
+        },
+        {
+          "rank": 2,
+          "image_id": "36a0e7b53779cc4f",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\716a8d440eb0d57fbf489d07e0d2b8f2.jpg",
+          "score": 2.34453,
+          "global_score": 2.34453,
+          "conjunction_score": 2.34453,
+          "facet_scores": {}
+        },
+        {
+          "rank": 3,
+          "image_id": "6ea1fa00441f9c90",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\9e1364942b6f33732f780404474136b0.jpg",
+          "score": 2.207803,
+          "global_score": 2.207803,
+          "conjunction_score": 2.207803,
+          "facet_scores": {}
+        },
+        {
+          "rank": 4,
+          "image_id": "1487b2603ee609bc",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\3059f14b186aa6d3add9b8d5844f6496.jpg",
+          "score": 2.156062,
+          "global_score": 2.156062,
+          "conjunction_score": 2.156062,
+          "facet_scores": {}
+        },
+        {
+          "rank": 5,
+          "image_id": "3216b17f87929a7d",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\a70857f8f76a18d097becc82eb33a9f1.jpg",
+          "score": 2.105585,
+          "global_score": 2.105585,
+          "conjunction_score": 2.105585,
+          "facet_scores": {}
+        },
+        {
+          "rank": 6,
+          "image_id": "b754cb2408e050e0",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\017feefa35d1e5a8d27d3b93a6d96d15.jpg",
+          "score": 2.050022,
+          "global_score": 2.050022,
+          "conjunction_score": 2.050022,
+          "facet_scores": {}
+        },
+        {
+          "rank": 7,
+          "image_id": "a29be3b44b7df7fe",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\06d3d5f692fedec651140520248bf5c9.jpg",
+          "score": 1.943928,
+          "global_score": 1.943928,
+          "conjunction_score": 1.943928,
+          "facet_scores": {}
+        },
+        {
+          "rank": 8,
+          "image_id": "34a2613570c49426",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\2c76c168ea0dc84e50cdc539d22c22da.jpg",
+          "score": 1.874219,
+          "global_score": 1.874219,
+          "conjunction_score": 1.874219,
+          "facet_scores": {}
+        },
+        {
+          "rank": 9,
+          "image_id": "a6764beb763836e9",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\78b4540e25f89ed0f3108375f5844bb8.jpg",
+          "score": 1.809792,
+          "global_score": 1.809792,
+          "conjunction_score": 1.809792,
+          "facet_scores": {}
+        },
+        {
+          "rank": 10,
+          "image_id": "e0ceeaa11efd151b",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\2c606f99f02e408b00ed4cfb5317c4e1.jpg",
+          "score": 1.775267,
+          "global_score": 1.775267,
+          "conjunction_score": 1.775267,
+          "facet_scores": {}
+        }
+      ],
+      "structured_top_10": [
+        {
+          "rank": 1,
+          "image_id": "a29be3b44b7df7fe",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\06d3d5f692fedec651140520248bf5c9.jpg",
+          "score": 1.452036,
+          "global_score": 1.943928,
+          "conjunction_score": 1.77086,
+          "facet_scores": {
+            "scene:modern office": 2.1327,
+            "style:professional business attire": 1.5968
+          }
+        },
+        {
+          "rank": 2,
+          "image_id": "6ea1fa00441f9c90",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\9e1364942b6f33732f780404474136b0.jpg",
+          "score": 1.356475,
+          "global_score": 2.207803,
+          "conjunction_score": 1.576869,
+          "facet_scores": {
+            "scene:modern office": 1.5314,
+            "style:professional business attire": 1.6292
+          }
+        },
+        {
+          "rank": 3,
+          "image_id": "bf284e3e404d8974",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\4098fcf6792d6ae8007dfb809cebd442.jpg",
+          "score": 1.30272,
+          "global_score": 2.590718,
+          "conjunction_score": 1.402312,
+          "facet_scores": {
+            "scene:modern office": 1.2916,
+            "style:professional business attire": 1.5652
+          }
+        },
+        {
+          "rank": 4,
+          "image_id": "3216b17f87929a7d",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\a70857f8f76a18d097becc82eb33a9f1.jpg",
+          "score": 1.291086,
+          "global_score": 2.105585,
+          "conjunction_score": 1.46324,
+          "facet_scores": {
+            "scene:modern office": 1.2451,
+            "style:professional business attire": 2.1642
+          }
+        },
+        {
+          "rank": 5,
+          "image_id": "452c53627ec69dd9",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\c7c45736d7976e2ee38eb285205c8404.jpg",
+          "score": 1.203137,
+          "global_score": 1.580037,
+          "conjunction_score": 1.387174,
+          "facet_scores": {
+            "scene:modern office": 1.1468,
+            "style:professional business attire": 2.9169
+          }
+        },
+        {
+          "rank": 6,
+          "image_id": "1487b2603ee609bc",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\3059f14b186aa6d3add9b8d5844f6496.jpg",
+          "score": 1.135749,
+          "global_score": 2.156062,
+          "conjunction_score": 1.228472,
+          "facet_scores": {
+            "scene:modern office": 1.0348,
+            "style:professional business attire": 1.6988
+          }
+        },
+        {
+          "rank": 7,
+          "image_id": "b754cb2408e050e0",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\017feefa35d1e5a8d27d3b93a6d96d15.jpg",
+          "score": 0.989239,
+          "global_score": 2.050022,
+          "conjunction_score": 1.048464,
+          "facet_scores": {
+            "scene:modern office": 1.0913,
+            "style:professional business attire": 1.0103
+          }
+        },
+        {
+          "rank": 8,
+          "image_id": "8886e2a181999801",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\e63981896c501e928f648b75b9efc773.jpg",
+          "score": 0.985041,
+          "global_score": 1.10063,
+          "conjunction_score": 1.253989,
+          "facet_scores": {
+            "scene:modern office": 1.1139,
+            "style:professional business attire": 1.4911
+          }
+        },
+        {
+          "rank": 9,
+          "image_id": "cfce2a5f08792478",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\90dedb55e09ac1f7a2fc3e37dfd12f51.jpg",
+          "score": 0.962322,
+          "global_score": 1.649051,
+          "conjunction_score": 1.082465,
+          "facet_scores": {
+            "scene:modern office": 1.4936,
+            "style:professional business attire": 0.8986
+          }
+        },
+        {
+          "rank": 10,
+          "image_id": "36a0e7b53779cc4f",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\716a8d440eb0d57fbf489d07e0d2b8f2.jpg",
+          "score": 0.934649,
+          "global_score": 2.34453,
+          "conjunction_score": 0.795388,
+          "facet_scores": {
+            "scene:modern office": 0.5548,
+            "style:professional business attire": 2.3553
+          }
+        }
+      ],
+      "structured_top1_rank_in_global_baseline": 7,
+      "note": "This is an unlabeled ranking comparison, not an accuracy metric."
+    },
+    {
+      "id": "semantic",
+      "query": "Someone wearing a blue shirt sitting on a park bench.",
+      "global_top_10": [
+        {
+          "rank": 1,
+          "image_id": "26c26d49297fed65",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\cd35a2d7fa74324fb80a0c0d4a55bf6b.jpg",
+          "score": 3.357713,
+          "global_score": 3.357713,
+          "conjunction_score": 3.357713,
+          "facet_scores": {}
+        },
+        {
+          "rank": 2,
+          "image_id": "cc46a5927fc48702",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\f06fd9e18c7a2c5b533e68de88fb487b.jpg",
+          "score": 3.348358,
+          "global_score": 3.348358,
+          "conjunction_score": 3.348358,
+          "facet_scores": {}
+        },
+        {
+          "rank": 3,
+          "image_id": "c3f87fdf88873acf",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\8c600039c2a2abf0caa5c632f2694fcb.jpg",
+          "score": 2.57556,
+          "global_score": 2.57556,
+          "conjunction_score": 2.57556,
+          "facet_scores": {}
+        },
+        {
+          "rank": 4,
+          "image_id": "5191c3020198ae4a",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\ea833ef036b391509407f002b97f261d.jpg",
+          "score": 2.440826,
+          "global_score": 2.440826,
+          "conjunction_score": 2.440826,
+          "facet_scores": {}
+        },
+        {
+          "rank": 5,
+          "image_id": "1bc9e0349a9fd9bc",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\c31564bf88c1d02aa8cb1e886ccaadef.jpg",
+          "score": 2.103983,
+          "global_score": 2.103983,
+          "conjunction_score": 2.103983,
+          "facet_scores": {}
+        },
+        {
+          "rank": 6,
+          "image_id": "c7e643d2a23ed698",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\620859fa8ef3a9f325a2208846866053.jpg",
+          "score": 2.068675,
+          "global_score": 2.068675,
+          "conjunction_score": 2.068675,
+          "facet_scores": {}
+        },
+        {
+          "rank": 7,
+          "image_id": "0d501cfe3c878496",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\e615b5460711beea4a0b1e6e1c3e9df5.jpg",
+          "score": 2.046206,
+          "global_score": 2.046206,
+          "conjunction_score": 2.046206,
+          "facet_scores": {}
+        },
+        {
+          "rank": 8,
+          "image_id": "99e0b04a80fbe6b6",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\7bc3b6a20add1e0aae70f881dd37a2c2.jpg",
+          "score": 1.912926,
+          "global_score": 1.912926,
+          "conjunction_score": 1.912926,
+          "facet_scores": {}
+        },
+        {
+          "rank": 9,
+          "image_id": "b44994536dda56ef",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\30df3d9900d355e80d47a9e52372eeda.jpg",
+          "score": 1.490696,
+          "global_score": 1.490696,
+          "conjunction_score": 1.490696,
+          "facet_scores": {}
+        },
+        {
+          "rank": 10,
+          "image_id": "e9908f1c015942a3",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\cd9737f2cf0967f12cc001d57568e913.jpg",
+          "score": 1.379175,
+          "global_score": 1.379175,
+          "conjunction_score": 1.379175,
+          "facet_scores": {}
+        }
+      ],
+      "structured_top_10": [
+        {
+          "rank": 1,
+          "image_id": "99e0b04a80fbe6b6",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\7bc3b6a20add1e0aae70f881dd37a2c2.jpg",
+          "score": 1.198646,
+          "global_score": 1.912926,
+          "conjunction_score": 1.038613,
+          "facet_scores": {
+            "binding:blue shirt": 1.2144,
+            "scene:park": 0.9929,
+            "action:sitting": 0.959
+          }
+        },
+        {
+          "rank": 2,
+          "image_id": "cc46a5927fc48702",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\f06fd9e18c7a2c5b533e68de88fb487b.jpg",
+          "score": 1.035733,
+          "global_score": 3.348358,
+          "conjunction_score": 0.615888,
+          "facet_scores": {
+            "binding:blue shirt": 0.2729,
+            "scene:park": 1.7638,
+            "action:sitting": 1.0393
+          }
+        },
+        {
+          "rank": 3,
+          "image_id": "5191c3020198ae4a",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\ea833ef036b391509407f002b97f261d.jpg",
+          "score": 0.800219,
+          "global_score": 2.440826,
+          "conjunction_score": 0.533974,
+          "facet_scores": {
+            "binding:blue shirt": 0.3724,
+            "scene:park": 0.6077,
+            "action:sitting": 0.7109
+          }
+        },
+        {
+          "rank": 4,
+          "image_id": "0d501cfe3c878496",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\e615b5460711beea4a0b1e6e1c3e9df5.jpg",
+          "score": 0.445867,
+          "global_score": 2.046206,
+          "conjunction_score": -0.178361,
+          "facet_scores": {
+            "binding:blue shirt": 1.3058,
+            "scene:park": -0.4826,
+            "action:sitting": 0.0001
+          }
+        },
+        {
+          "rank": 5,
+          "image_id": "e9908f1c015942a3",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\cd9737f2cf0967f12cc001d57568e913.jpg",
+          "score": 0.41081,
+          "global_score": 1.379175,
+          "conjunction_score": -0.287607,
+          "facet_scores": {
+            "binding:blue shirt": 1.942,
+            "scene:park": -0.6318,
+            "action:sitting": 0.1063
+          }
+        },
+        {
+          "rank": 6,
+          "image_id": "b44994536dda56ef",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\30df3d9900d355e80d47a9e52372eeda.jpg",
+          "score": 0.385962,
+          "global_score": 1.490696,
+          "conjunction_score": 0.212445,
+          "facet_scores": {
+            "binding:blue shirt": -0.0354,
+            "scene:park": 0.7371,
+            "action:sitting": 0.3149
+          }
+        },
+        {
+          "rank": 7,
+          "image_id": "26c26d49297fed65",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\cd35a2d7fa74324fb80a0c0d4a55bf6b.jpg",
+          "score": 0.374576,
+          "global_score": 3.357713,
+          "conjunction_score": -0.217477,
+          "facet_scores": {
+            "binding:blue shirt": -0.5965,
+            "scene:park": 1.0901,
+            "action:sitting": 1.1065
+          }
+        },
+        {
+          "rank": 8,
+          "image_id": "eb546ee75482cbd8",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\feffaa7a759648ef521ace8d7b219fd1.jpg",
+          "score": 0.337027,
+          "global_score": -0.499628,
+          "conjunction_score": 0.506605,
+          "facet_scores": {
+            "binding:blue shirt": 0.3571,
+            "scene:park": 0.5654,
+            "action:sitting": 0.673
+          }
+        },
+        {
+          "rank": 9,
+          "image_id": "aed90e315498077e",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\0df11a4383879c0326896fefa30e8f6c.jpg",
+          "score": 0.306958,
+          "global_score": -0.583015,
+          "conjunction_score": 0.406577,
+          "facet_scores": {
+            "binding:blue shirt": 0.6908,
+            "scene:park": 0.2637,
+            "action:sitting": 0.3889
+          }
+        },
+        {
+          "rank": 10,
+          "image_id": "54c9ca5645225e25",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\eb001cb29f156112d158a52621e70964.jpg",
+          "score": 0.306204,
+          "global_score": 0.868165,
+          "conjunction_score": 0.075026,
+          "facet_scores": {
+            "binding:blue shirt": 0.3678,
+            "scene:park": -0.2524,
+            "action:sitting": 1.4754
+          }
+        }
+      ],
+      "structured_top1_rank_in_global_baseline": 8,
+      "note": "This is an unlabeled ranking comparison, not an accuracy metric."
+    },
+    {
+      "id": "style",
+      "query": "Casual weekend outfit for a city walk.",
+      "global_top_10": [
+        {
+          "rank": 1,
+          "image_id": "4422ac5ed2ae05ab",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\3b090c8c5228647a7c486ed9f1b14309.jpg",
+          "score": 3.231109,
+          "global_score": 3.231109,
+          "conjunction_score": 3.231109,
+          "facet_scores": {}
+        },
+        {
+          "rank": 2,
+          "image_id": "cec88ad2c70641f6",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\fc3ee8e64072d2b42d6a8c2d1e52e2da.jpg",
+          "score": 2.548052,
+          "global_score": 2.548052,
+          "conjunction_score": 2.548052,
+          "facet_scores": {}
+        },
+        {
+          "rank": 3,
+          "image_id": "c124cc95b73cd099",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\cfbabd988312ff3c07fe7f3363ba96a5.jpg",
+          "score": 2.433308,
+          "global_score": 2.433308,
+          "conjunction_score": 2.433308,
+          "facet_scores": {}
+        },
+        {
+          "rank": 4,
+          "image_id": "a157840da07409a6",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\2f556569b5f72e04cd73da21ff1144d4.jpg",
+          "score": 2.309036,
+          "global_score": 2.309036,
+          "conjunction_score": 2.309036,
+          "facet_scores": {}
+        },
+        {
+          "rank": 5,
+          "image_id": "b3c9296c58d97b4d",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\14ce620645bc27f4710e2141432e7139.jpg",
+          "score": 2.093819,
+          "global_score": 2.093819,
+          "conjunction_score": 2.093819,
+          "facet_scores": {}
+        },
+        {
+          "rank": 6,
+          "image_id": "931afc7d35b3973d",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\7f5cd5f13122b4bc95fe1a7bf0df56aa.jpg",
+          "score": 1.922429,
+          "global_score": 1.922429,
+          "conjunction_score": 1.922429,
+          "facet_scores": {}
+        },
+        {
+          "rank": 7,
+          "image_id": "9909a47e283292ad",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\bfb8f667129a73bbb2e54551816ab37b.jpg",
+          "score": 1.852733,
+          "global_score": 1.852733,
+          "conjunction_score": 1.852733,
+          "facet_scores": {}
+        },
+        {
+          "rank": 8,
+          "image_id": "fcd49b24ed94b09e",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\94c75e94e8a6cc040c001f825686ad2c.jpg",
+          "score": 1.794778,
+          "global_score": 1.794778,
+          "conjunction_score": 1.794778,
+          "facet_scores": {}
+        },
+        {
+          "rank": 9,
+          "image_id": "4ec0e803c796585a",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\5446d1fd42c4c2baac5bc3ae647b2f7d.jpg",
+          "score": 1.716479,
+          "global_score": 1.716479,
+          "conjunction_score": 1.716479,
+          "facet_scores": {}
+        },
+        {
+          "rank": 10,
+          "image_id": "0ed6677a850c0cac",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\2e86f57dc5056cd9e47b99eec737187e.jpg",
+          "score": 1.618896,
+          "global_score": 1.618896,
+          "conjunction_score": 1.618896,
+          "facet_scores": {}
+        }
+      ],
+      "structured_top_10": [
+        {
+          "rank": 1,
+          "image_id": "0ed6677a850c0cac",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\2e86f57dc5056cd9e47b99eec737187e.jpg",
+          "score": 0.970508,
+          "global_score": 1.618896,
+          "conjunction_score": 1.103283,
+          "facet_scores": {
+            "scene:urban street": 0.9232,
+            "style:casual weekend outfit": 1.4941
+          }
+        },
+        {
+          "rank": 2,
+          "image_id": "4422ac5ed2ae05ab",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\3b090c8c5228647a7c486ed9f1b14309.jpg",
+          "score": 0.906573,
+          "global_score": 3.231109,
+          "conjunction_score": 0.595481,
+          "facet_scores": {
+            "scene:urban street": 0.3655,
+            "style:casual weekend outfit": 1.5223
+          }
+        },
+        {
+          "rank": 3,
+          "image_id": "b3c9296c58d97b4d",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\14ce620645bc27f4710e2141432e7139.jpg",
+          "score": 0.888139,
+          "global_score": 2.093819,
+          "conjunction_score": 0.870962,
+          "facet_scores": {
+            "scene:urban street": 0.7056,
+            "style:casual weekend outfit": 1.1952
+          }
+        },
+        {
+          "rank": 4,
+          "image_id": "c823d261c270ea69",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\014c44b97f844dffda594b9e00a4b3fd.jpg",
+          "score": 0.770372,
+          "global_score": 0.395002,
+          "conjunction_score": 1.083992,
+          "facet_scores": {
+            "scene:urban street": 1.3697,
+            "style:casual weekend outfit": 0.9288
+          }
+        },
+        {
+          "rank": 5,
+          "image_id": "d097c92f7b1a0592",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\06c55d20eabb8441eb9b366025cc43ce.jpg",
+          "score": 0.732105,
+          "global_score": 1.09135,
+          "conjunction_score": 0.869086,
+          "facet_scores": {
+            "scene:urban street": 0.745,
+            "style:casual weekend outfit": 1.0631
+          }
+        },
+        {
+          "rank": 6,
+          "image_id": "931afc7d35b3973d",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\7f5cd5f13122b4bc95fe1a7bf0df56aa.jpg",
+          "score": 0.720559,
+          "global_score": 1.922429,
+          "conjunction_score": 0.664142,
+          "facet_scores": {
+            "scene:urban street": 0.6097,
+            "style:casual weekend outfit": 0.7286
+          }
+        },
+        {
+          "rank": 7,
+          "image_id": "e1327b2afe7be885",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\4f1a11c52275858bcbcffa06085e75fa.jpg",
+          "score": 0.631548,
+          "global_score": 0.873691,
+          "conjunction_score": 0.768146,
+          "facet_scores": {
+            "scene:urban street": 0.8723,
+            "style:casual weekend outfit": 0.688
+          }
+        },
+        {
+          "rank": 8,
+          "image_id": "9909a47e283292ad",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\bfb8f667129a73bbb2e54551816ab37b.jpg",
+          "score": 0.609977,
+          "global_score": 1.852733,
+          "conjunction_score": 0.419167,
+          "facet_scores": {
+            "scene:urban street": 1.851,
+            "style:casual weekend outfit": 0.1795
+          }
+        },
+        {
+          "rank": 9,
+          "image_id": "fcd49b24ed94b09e",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\94c75e94e8a6cc040c001f825686ad2c.jpg",
+          "score": 0.558663,
+          "global_score": 1.794778,
+          "conjunction_score": 0.444827,
+          "facet_scores": {
+            "scene:urban street": 0.4945,
+            "style:casual weekend outfit": 0.4014
+          }
+        },
+        {
+          "rank": 10,
+          "image_id": "02bfa8ac0a2f9df1",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\d6fdd26de5d7dd80f1179b6c631b9f2c.jpg",
+          "score": 0.534023,
+          "global_score": 0.998136,
+          "conjunction_score": 0.589727,
+          "facet_scores": {
+            "scene:urban street": 0.5163,
+            "style:casual weekend outfit": 0.6828
+          }
+        }
+      ],
+      "structured_top1_rank_in_global_baseline": 10,
+      "note": "This is an unlabeled ranking comparison, not an accuracy metric."
+    },
+    {
+      "id": "compositional",
+      "query": "A red tie and a white shirt in a formal setting.",
+      "global_top_10": [
+        {
+          "rank": 1,
+          "image_id": "09a56c799b4069ef",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\004e9e21cd1aca568a8ffc77a54638ce.jpg",
+          "score": 4.0,
+          "global_score": 4.0,
+          "conjunction_score": 4.0,
+          "facet_scores": {}
+        },
+        {
+          "rank": 2,
+          "image_id": "a6764beb763836e9",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\78b4540e25f89ed0f3108375f5844bb8.jpg",
+          "score": 3.365223,
+          "global_score": 3.365223,
+          "conjunction_score": 3.365223,
+          "facet_scores": {}
+        },
+        {
+          "rank": 3,
+          "image_id": "4c2ca541cb5f1c92",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\913109abff6b0222d9afed1c7aaeb38f.jpg",
+          "score": 2.45049,
+          "global_score": 2.45049,
+          "conjunction_score": 2.45049,
+          "facet_scores": {}
+        },
+        {
+          "rank": 4,
+          "image_id": "6c8ed83e86e9421e",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\44251236b18ca10def4cae4fc7c6c422.jpg",
+          "score": 2.318666,
+          "global_score": 2.318666,
+          "conjunction_score": 2.318666,
+          "facet_scores": {}
+        },
+        {
+          "rank": 5,
+          "image_id": "9d7ce3ef860a56c0",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\572743d005cbb6a1d481a02243b1a259.jpg",
+          "score": 1.997709,
+          "global_score": 1.997709,
+          "conjunction_score": 1.997709,
+          "facet_scores": {}
+        },
+        {
+          "rank": 6,
+          "image_id": "df897240e6787ccc",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\b77ff25fea3bb5dcb70381b041663e51.jpg",
+          "score": 1.766421,
+          "global_score": 1.766421,
+          "conjunction_score": 1.766421,
+          "facet_scores": {}
+        },
+        {
+          "rank": 7,
+          "image_id": "63fa852d64461df8",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\bd4c2ae0478c2162033a02216e394604.jpg",
+          "score": 1.669572,
+          "global_score": 1.669572,
+          "conjunction_score": 1.669572,
+          "facet_scores": {}
+        },
+        {
+          "rank": 8,
+          "image_id": "30a9a51fc93bacab",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\c8110d529733b4e233fd393dd6f5f0c0.jpg",
+          "score": 1.254582,
+          "global_score": 1.254582,
+          "conjunction_score": 1.254582,
+          "facet_scores": {}
+        },
+        {
+          "rank": 9,
+          "image_id": "61b3573b26d74c86",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\6cbdfad69032913bb177428379ed137e.jpg",
+          "score": 1.238253,
+          "global_score": 1.238253,
+          "conjunction_score": 1.238253,
+          "facet_scores": {}
+        },
+        {
+          "rank": 10,
+          "image_id": "18b577e1deea55a4",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\daf5e5c58d573f7b7d7d64ae30bdd4b5.jpg",
+          "score": 1.178657,
+          "global_score": 1.178657,
+          "conjunction_score": 1.178657,
+          "facet_scores": {}
+        }
+      ],
+      "structured_top_10": [
+        {
+          "rank": 1,
+          "image_id": "4c2ca541cb5f1c92",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\913109abff6b0222d9afed1c7aaeb38f.jpg",
+          "score": 1.147113,
+          "global_score": 2.45049,
+          "conjunction_score": 0.726693,
+          "facet_scores": {
+            "binding:red tie": 2.4782,
+            "binding:white shirt": 0.3412,
+            "scene:formal setting": 0.922,
+            "style:formal outfit": 1.0362
+          }
+        },
+        {
+          "rank": 2,
+          "image_id": "09a56c799b4069ef",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\004e9e21cd1aca568a8ffc77a54638ce.jpg",
+          "score": 0.988912,
+          "global_score": 4.0,
+          "conjunction_score": 0.19196,
+          "facet_scores": {
+            "binding:red tie": 1.812,
+            "binding:white shirt": 1.0194,
+            "scene:formal setting": -0.176,
+            "style:formal outfit": 0.18
+          }
+        },
+        {
+          "rank": 3,
+          "image_id": "9d7ce3ef860a56c0",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\572743d005cbb6a1d481a02243b1a259.jpg",
+          "score": 0.9871,
+          "global_score": 1.997709,
+          "conjunction_score": 0.739437,
+          "facet_scores": {
+            "binding:red tie": 0.4692,
+            "binding:white shirt": 0.5472,
+            "scene:formal setting": 1.6886,
+            "style:formal outfit": 1.8938
+          }
+        },
+        {
+          "rank": 4,
+          "image_id": "8886e2a181999801",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\e63981896c501e928f648b75b9efc773.jpg",
+          "score": 0.898045,
+          "global_score": 1.001735,
+          "conjunction_score": 0.789291,
+          "facet_scores": {
+            "binding:red tie": 1.3695,
+            "binding:white shirt": 0.3543,
+            "scene:formal setting": 1.4881,
+            "style:formal outfit": 1.3377
+          }
+        },
+        {
+          "rank": 5,
+          "image_id": "a6764beb763836e9",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\78b4540e25f89ed0f3108375f5844bb8.jpg",
+          "score": 0.793133,
+          "global_score": 3.365223,
+          "conjunction_score": -0.123845,
+          "facet_scores": {
+            "binding:red tie": 2.8188,
+            "binding:white shirt": -0.6047,
+            "scene:formal setting": 1.7348,
+            "style:formal outfit": 0.9662
+          }
+        },
+        {
+          "rank": 6,
+          "image_id": "1487b2603ee609bc",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\3059f14b186aa6d3add9b8d5844f6496.jpg",
+          "score": 0.606721,
+          "global_score": 0.445821,
+          "conjunction_score": 0.566781,
+          "facet_scores": {
+            "binding:red tie": 0.2428,
+            "binding:white shirt": 0.4639,
+            "scene:formal setting": 1.3586,
+            "style:formal outfit": 1.7905
+          }
+        },
+        {
+          "rank": 7,
+          "image_id": "3316ede49acf08bd",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\11c17cfa0c3e2ee65046d0d77c6f8b07.jpg",
+          "score": 0.528494,
+          "global_score": 0.792738,
+          "conjunction_score": 0.238398,
+          "facet_scores": {
+            "binding:red tie": 1.6427,
+            "binding:white shirt": -0.2344,
+            "scene:formal setting": 1.0196,
+            "style:formal outfit": 1.733
+          }
+        },
+        {
+          "rank": 8,
+          "image_id": "cfce2a5f08792478",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\90dedb55e09ac1f7a2fc3e37dfd12f51.jpg",
+          "score": 0.516444,
+          "global_score": -0.494078,
+          "conjunction_score": 0.624871,
+          "facet_scores": {
+            "binding:red tie": 1.2146,
+            "binding:white shirt": 0.2181,
+            "scene:formal setting": 1.0302,
+            "style:formal outfit": 1.0418
+          }
+        },
+        {
+          "rank": 9,
+          "image_id": "30a9a51fc93bacab",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\c8110d529733b4e233fd393dd6f5f0c0.jpg",
+          "score": 0.512416,
+          "global_score": 1.254582,
+          "conjunction_score": 0.334044,
+          "facet_scores": {
+            "binding:red tie": -0.023,
+            "binding:white shirt": 0.3442,
+            "scene:formal setting": 0.9404,
+            "style:formal outfit": 1.2274
+          }
+        },
+        {
+          "rank": 10,
+          "image_id": "054f0ed2233352e4",
+          "path": "D:\\Projects\\Glance\\val_test2020\\test\\8aab8f565c3dacb0b9adf8720a2a7324.jpg",
+          "score": 0.449634,
+          "global_score": 0.277579,
+          "conjunction_score": 0.424226,
+          "facet_scores": {
+            "binding:red tie": 0.997,
+            "binding:white shirt": 0.3657,
+            "scene:formal setting": 0.1831,
+            "style:formal outfit": 0.585
+          }
+        }
+      ],
+      "structured_top1_rank_in_global_baseline": 3,
+      "note": "This is an unlabeled ranking comparison, not an accuracy metric."
+    }
+  ]
+}

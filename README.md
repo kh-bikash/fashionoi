@@ -22,14 +22,18 @@ Query -> full embedding ---------------------------> candidate retrieval
 scripts/index.py             Part A: image indexing CLI
 scripts/search.py            Part B: natural-language retrieval CLI
 scripts/search_all.py        Batch runner for the five assignment queries
+scripts/benchmark.py         Stage-level retrieval latency benchmark
 scripts/evaluate.py          MRR, Recall@k, nDCG@k from human judgments
 src/glance_retrieval/        Reusable ML, storage, parsing, and scoring modules
 evaluation/                  Five assignment queries and judgment template
 tests/                       Offline unit tests for parser, scoring, and storage
 output/pdf/                  Final assignment write-up
+DATASET.md                   Source, split, annotation, coverage, and license notes
 ```
 
-I intentionally exclude the downloaded dataset from Git. My workspace has 3,200 Fashionpedia test JPGs in `val_test2020/test`; the default indexer takes a deterministic 1,000-image subset, satisfying the assignment size requirement.
+I intentionally exclude the downloaded dataset from Git. My workspace has 3,200 Fashionpedia test JPGs in `val_test2020/test`. The official test archive contains images but no public garment annotations, so the default system works annotation-free. When Fashionpedia train/validation instance JSON is available, the same indexer adds the annotated apparel boxes as higher-quality local regions.
+
+Because the assignment also requires office, street, park, and home variation, I do not assume that a random fashion subset is context-balanced. `scripts/curate_dataset.py` audits all 3,200 images with zero-shot environment, clothing, and color prompts and writes a reproducible 1,000-image selection. Its scores are curation proxies, not ground-truth scene labels.
 
 ## Submission status
 
@@ -38,13 +42,12 @@ The source code, real model run, evaluation contact sheets, and PDF are complete
 1. Audited all 3,200 images with zero corrupt files.
 2. Indexed a deterministic 1,000-image subset into 1,000 global and 7,000 local FashionSigLIP vectors.
 3. Ran all five required queries and inspected their contact sheets.
-4. Verified 8/8 offline tests and the index integrity checks.
+4. Generated a coverage-aware 1,000-image selection with explicit environment, clothing, and color quotas.
+5. Verified 11/11 offline tests and the index integrity checks.
 
-The only required submission action left is publishing this folder to GitHub and regenerating the PDF with the URL:
+The public codebase is:
 
-```bash
-python scripts/build_report.py --repo-url https://github.com/USERNAME/REPOSITORY
-```
+[https://github.com/kh-bikash/fashionoi](https://github.com/kh-bikash/fashionoi)
 
 Independent human relevance labels are optional but required before reporting MRR, Recall@10, or nDCG@10. To reproduce the full model run from scratch, use `powershell -ExecutionPolicy Bypass -File scripts/run_assignment.ps1`.
 
@@ -56,7 +59,10 @@ Python 3.10+ is recommended. The first model-backed command downloads model weig
 python -m venv .venv
 .venv/Scripts/activate
 pip install -r requirements.txt
+pip install -e .
 ```
+
+For tests and report generation, use `pip install -e ".[test,report]"`.
 
 Optional FAISS acceleration:
 
@@ -68,12 +74,20 @@ If FAISS is unavailable, the same index format uses exact NumPy cosine search. T
 
 ## Part A - index images
 
+First create the coverage-aware 1,000-image selection from the downloaded test archive:
+
+```bash
+python scripts/curate_dataset.py --image-dir val_test2020/test
+```
+
+This writes `evaluation/curated_fashionpedia_1000.txt`, `reports/coverage_audit.json`, and a context montage. Then index that exact selection:
+
 ```bash
 python scripts/index.py \
   --image-dir val_test2020/test \
+  --selection-file evaluation/curated_fashionpedia_1000.txt \
   --output artifacts/fashionpedia-1000 \
-  --max-images 1000 \
-  --seed 17
+  --max-images 1000
 ```
 
 With Fashionpedia validation annotations, add:
@@ -104,6 +118,16 @@ Each result includes the final score, global score, conjunction score, and every
 
 Run all five assignment queries by invoking `scripts/search.py` for each entry in `evaluation/queries.json`.
 
+For an auditable ablation, compare full-image one-vector retrieval with the chosen structured reranker:
+
+```bash
+python scripts/compare_ablation.py
+```
+
+The generated JSON reports how far the structured top result moved relative to the one-vector baseline. It is deliberately described as an unlabeled ranking comparison until relevance judgments are added.
+
+Measure model-warm retrieval stages separately with `python scripts/benchmark.py`. The report excludes model download/startup and records full-query encoding, ANN/exact candidate search, and structured reranking time for each assignment query.
+
 ## Evaluation without label leakage
 
 Fashionpedia's test split has no public ground-truth attributes. Do not claim a fabricated accuracy. Instead:
@@ -124,6 +148,8 @@ python -m unittest discover -s tests -v
 python scripts/profile_dataset.py
 ```
 
+The editable install in Setup makes `glance_retrieval` importable for the test command.
+
 ## Scalability to one million images
 
 Image embeddings are computed offline and memory-mapped at query time. FAISS HNSW works well into the low millions when recall and latency matter more than memory. At larger scale, replace HNSW with IVF-PQ or a managed vector service, shard by catalog/region, store float16 or product-quantized vectors, batch GPU inference, and rerank only 100-500 candidates. The query parser and reranker are independent of the candidate index.
@@ -141,6 +167,7 @@ Sampling uses SHA-256 over `seed:path`, not Python's process-randomized hash. Ve
 
 ## References
 
+- [Official Fashionpedia dataset repository and downloads](https://github.com/cvdfoundation/fashionpedia)
 - [Fashionpedia project](https://fashionpedia.github.io/home/index.html)
 - [Fashionpedia paper](https://arxiv.org/abs/2004.12276)
 - [Marqo-FashionSigLIP model card](https://huggingface.co/Marqo/marqo-fashionSigLIP)

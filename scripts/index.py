@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from glance_retrieval.dataset import deterministic_sample, discover_images, iter_records, load_annotation_boxes
+from glance_retrieval.dataset import deterministic_sample, discover_images, iter_records, load_annotation_boxes, load_selection_file
 from glance_retrieval.encoder import OpenClipEncoder
 from glance_retrieval.indexing import build_index
 
@@ -17,6 +17,7 @@ def main() -> None:
     parser.add_argument("--image-dir", type=Path, default=ROOT / "val_test2020" / "test")
     parser.add_argument("--output", type=Path, default=ROOT / "artifacts" / "fashionpedia-1000")
     parser.add_argument("--annotations", type=Path, default=None, help="Optional Fashionpedia instances JSON")
+    parser.add_argument("--selection-file", type=Path, default=None, help="Optional newline-delimited paths relative to --image-dir")
     parser.add_argument("--max-images", type=int, default=1000, help="0 indexes all images")
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--model", default="hf-hub:Marqo/marqo-fashionSigLIP")
@@ -26,10 +27,11 @@ def main() -> None:
     parser.add_argument("--no-faiss", action="store_true")
     args = parser.parse_args()
 
-    paths = deterministic_sample(discover_images(args.image_dir), args.max_images, args.seed)
+    all_paths = discover_images(args.image_dir)
+    paths = load_selection_file(args.selection_file, args.image_dir) if args.selection_file else deterministic_sample(all_paths, args.max_images, args.seed)
     annotation_boxes = load_annotation_boxes(args.annotations)
     records = list(iter_records(paths, annotation_boxes))
-    print(f"Selected {len(records)} of {len(discover_images(args.image_dir))} images")
+    print(f"Selected {len(records)} of {len(all_paths)} images")
     encoder = OpenClipEncoder(args.model, args.device, args.batch_size)
 
     def progress(done: int, total: int, path: Path) -> None:

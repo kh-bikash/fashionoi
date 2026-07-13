@@ -47,6 +47,30 @@ def deterministic_sample(paths: list[Path], limit: int | None, seed: int) -> lis
     return sorted(sorted(paths, key=key)[:limit], key=lambda p: p.as_posix().lower())
 
 
+def load_selection_file(selection_path: Path, image_root: Path) -> list[Path]:
+    """Resolve a reproducible image selection written as paths relative to image_root."""
+    image_root = image_root.expanduser().resolve()
+    selected: list[Path] = []
+    seen: set[Path] = set()
+    for line_number, raw in enumerate(selection_path.read_text(encoding="utf-8").splitlines(), start=1):
+        value = raw.strip()
+        if not value or value.startswith("#"):
+            continue
+        path = (image_root / value).resolve()
+        try:
+            path.relative_to(image_root)
+        except ValueError as exc:
+            raise ValueError(f"Selection line {line_number} escapes the image directory: {value}") from exc
+        if not path.is_file() or path.suffix.lower() not in IMAGE_SUFFIXES:
+            raise FileNotFoundError(f"Selection line {line_number} is not a supported image: {path}")
+        if path not in seen:
+            selected.append(path)
+            seen.add(path)
+    if not selected:
+        raise ValueError(f"Selection file contains no images: {selection_path}")
+    return selected
+
+
 def heuristic_regions(width: int, height: int) -> tuple[Region, ...]:
     """Multi-scale crops tuned for mostly portrait outfit imagery.
 
@@ -114,4 +138,3 @@ def load_region_images(record: ImageRecord, max_annotation_regions: int = 12) ->
         selected = list(record.regions[:7])
         selected.extend(record.regions[7 : 7 + max_annotation_regions])
         return [image.crop(region.box).copy() for region in selected]
-

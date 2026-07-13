@@ -21,6 +21,7 @@ def main() -> None:
     parser.add_argument("--index", type=Path, default=ROOT / "artifacts" / "fashionpedia-1000")
     parser.add_argument("-k", type=int, default=5)
     parser.add_argument("--candidate-k", type=int, default=100)
+    parser.add_argument("--strategy", choices=("global", "structured"), default="structured")
     parser.add_argument("--device", default=None)
     parser.add_argument("--json", type=Path, default=None)
     parser.add_argument("--contact-sheet", type=Path, default=None)
@@ -28,8 +29,8 @@ def main() -> None:
 
     manifest, *_ = IndexStore(args.index).load()
     encoder = OpenClipEncoder(manifest.model_id, args.device)
-    results = FashionRetriever(args.index, encoder).search(args.query, args.k, args.candidate_k)
-    payload = {"query": args.query, "results": [asdict(result) for result in results]}
+    results = FashionRetriever(args.index, encoder).search(args.query, args.k, args.candidate_k, args.strategy)
+    payload = {"query": args.query, "strategy": args.strategy, "results": [asdict(result) for result in results]}
     print(json.dumps(payload, indent=2))
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
@@ -40,4 +41,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
