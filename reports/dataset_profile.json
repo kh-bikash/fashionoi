@@ -1,0 +1,24 @@
+{
+  "root": "D:\\Projects\\Glance\\val_test2020\\test",
+  "image_count": 3200,
+  "valid_images": 3200,
+  "corrupt_images": [],
+  "formats": {
+    ".jpg": 3200
+  },
+  "orientation": {
+    "portrait": 2536,
+    "landscape": 608,
+    "square": 56
+  },
+  "width": {
+    "min": 347,
+    "median": 682.0,
+    "max": 1024
+  },
+  "height": {
+    "min": 471,
+    "median": 1024.0,
+    "max": 1024
+  }
+}

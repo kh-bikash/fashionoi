@@ -1,0 +1,8 @@
+[
+  {"query": "A person in a bright yellow raincoat.", "relevant_image_ids": []},
+  {"query": "Professional business attire inside a modern office.", "relevant_image_ids": []},
+  {"query": "Someone wearing a blue shirt sitting on a park bench.", "relevant_image_ids": []},
+  {"query": "Casual weekend outfit for a city walk.", "relevant_image_ids": []},
+  {"query": "A red tie and a white shirt in a formal setting.", "relevant_image_ids": []}
+]
+

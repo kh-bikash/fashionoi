@@ -1,0 +1,22 @@
+{
+  "model": "hf-hub:Marqo/marqo-fashionSigLIP",
+  "dataset_images_available": 3200,
+  "indexed_images": 1000,
+  "embedding_dimension": 768,
+  "regions_per_image": 7,
+  "vector_integrity": {
+    "all_finite": true,
+    "all_global_vectors_unit_normalized": true,
+    "global_shape": [1000, 768],
+    "region_shape": [1000, 7, 768]
+  },
+  "top_results": {
+    "attribute": {"image_id": "b5b51154d3218215", "score": 3.13368, "file": "729331a4d925fefce91c66918f4a14eb.jpg"},
+    "context": {"image_id": "a29be3b44b7df7fe", "score": 1.452036, "file": "06d3d5f692fedec651140520248bf5c9.jpg"},
+    "semantic": {"image_id": "99e0b04a80fbe6b6", "score": 1.198646, "file": "7bc3b6a20add1e0aae70f881dd37a2c2.jpg"},
+    "style": {"image_id": "0ed6677a850c0cac", "score": 0.970508, "file": "2e86f57dc5056cd9e47b99eec737187e.jpg"},
+    "compositional": {"image_id": "4c2ca541cb5f1c92", "score": 1.147113, "file": "913109abff6b0222d9afed1c7aaeb38f.jpg"}
+  },
+  "tests_passed": 8,
+  "notes": "Scores are query-local reranking scores, not probabilities. Quantitative metrics require independent relevance judgments."
+}

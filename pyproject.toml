@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glance-fashion-retrieval"
+version = "0.1.0"
+description = "Fashion-aware multimodal retrieval with compositional reranking"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "Pillow>=10.0",
+  "torch==2.6.0",
+  "torchvision==0.21.0",
+  "open-clip-torch==2.32.0",
+  "huggingface-hub>=0.23",
+  "transformers>=4.45,<5",
+]
+
+[project.optional-dependencies]
+faiss = ["faiss-cpu>=1.8"]
+test = ["pytest>=8.0"]
+report = ["reportlab>=4.0", "pypdf>=4.0", "pdfplumber>=0.11"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
